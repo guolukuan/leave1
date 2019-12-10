@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+         body{
+            width: 100%;
+            background-color: #ffdbaf;
+        }
+        .head_nav{
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #666;
+        }
+        .head_nav a{
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            width: 33.05%;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            color: #fffdfd;
+        }
+        .my_table{
+            margin: 0 auto;
+            margin-top: 45px;
+        }
+        .link_page{
+            height: 45px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head_nav">
+        <a href="{% url 'leaveapp:apply' %}">首页</a>
+            <a href="{% url 'user:usercentre' %}">个人信息</a>
+            <a href="{% url 'leaveapp:index' %}">请假批准</a>
+            <a href="{% url 'user:exit' %}">退出</a>
+    </div>
+    <table border="1" class="my_table">
+        <thead>
+            <tr>
+                <th>请假人</th>
+                <th>请假人性别</th>
+                <th>请假部门</th>
+                <th>请假人手机号</th>
+                <th>起始时间</th>
+                <th>到期时间</th>
+                <th>请假原因</th>
+                <th>待批准</th>
+                <th>批准</th>
+                <th>不批准</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for foo in ratify %}
+                <tr>
+                <td>{{ foo.name }}</td>
+                <td>{{ foo.sex }}</td>
+                <td>{{ foo.department }}</td>
+                <td>{{ foo.phone }}</td>
+                <td>{{ foo.start_data }}</td>
+                <td>{{ foo.due_date }}</td>
+                <td>{{  foo.cause }}</td>
+                <td>{{ foo.affirm }}</td>
+                <td><a href="{% url 'leaveapp:decision' id=foo.id %}">点击批准</a></td>
+                <td><a href="{% url 'leaveapp:unapproved' id=foo.id %}">点击不批准</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</body>
+</html>

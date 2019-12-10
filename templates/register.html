@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #ffdbaf;
+        }
+        h3{
+            text-align:center;
+            margin-top:15%;
+        }
+        input{
+            margin-top: 20px;
+            width: 300px;
+            height: 50px;
+        }
+        html，body{
+            width: 100%;
+            background-color: #fffdfd;
+        }
+        .head_nav{
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #666;
+        }
+        .head_nav a{
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            width: 33.05%;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            color: #fffdfd;
+        }
+        .my_table{
+            margin: 0 auto;
+            margin-top: 45px;
+        }
+        .link_page{
+            height: 45px;
+        }
+    </style>
+</head>
+<body>
+<div class="head_nav">
+        <a href="{% url 'user:login' %}">登录模块</a>
+        <a href="">注册</a>
+    </div>
+<h3>注册模块</h3>
+<div style="width:100%;text-align:center;">
+<form action="{% url 'user:register' %}" method="post" id="biaodan">
+    {% csrf_token %}<br>
+    账号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="username" ><br>
+    密码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="password" ><br>
+    确认密码:<input type="text" name="mail" ><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="点击注册">
+</form></div>
+</body>
+</html>

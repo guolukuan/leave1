@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+ <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background-color: #ffdbaf;
+        }
+         html，body{
+            width: 100%;
+            background-color: #fffdfd;
+        }
+        .head_nav{
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #666;
+        }
+        .head_nav a{
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            width: 33.05%;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            color: #fffdfd;
+        }
+        .big_box{
+            text-align: center;
+        }
+        .my_form1,.my_form2{
+            margin: 50px 0;
+        }
+        .form_info{
+            width: 50%;
+            border: 1px solid purple;
+            margin: 0 auto;
+        }
+        .form_info p{
+            margin: 15px 0;
+        }
+    </style>
+<body>
+    <div class="head_nav">
+        {% if users.is_staff %}
+           <a href="{% url 'leaveapp:apply' %}">首页</a>
+            <a href="{% url 'user:usercentre' %}">个人信息</a>
+            <a href="{% url 'leaveapp:index' %}">请假批准</a>
+            <a href="{% url 'user:exit' %}">退出</a>
+        {% else %}
+            <a href="{% url 'leaveapp:apply' %}">首页</a>
+            <a href="{% url 'user:usercentre' %}">个人信息</a>
+            <a href="{% url 'leaveapp:result' %}">查看结果</a>
+            <a href="{% url 'user:exit' %}">退出</a>
+        {% endif %}
+
+    </div>
+    <div class="big_box">
+        {% if message %}
+        <div class="my_form1">
+            <form action="{% url 'user:update' %}" method="post">
+                <div class="form_info">
+                    {% csrf_token %}
+{#                    <p><label for="name">姓名：</label><input type="text" name="name" id="name" value="{{ message.name }}"></p>#}
+                    <p><label for="age">年龄：</label><input type="text" name="age" id="age" value="{{ message.age }}"></p>
+                    <p><label for="sex">性别：</label><input type="text" name="sex" id="sex" value="{{ message.sex }}"></p>
+                    <p><label for="serial">员工编号：</label><input type="text" name="serial" id="serial" value="{{ message.serial }}"></p>
+                    <p><label for="phone">电话号码：</label><input type="text" name="phone" id="phone" value="{{ message.phone }}"></p>
+                    <p><label for="section">隶属部门：</label><input type="text" name="section" id="section" value="{{message.section }}"></p>
+                    <input type="submit" value="提交">
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <div class="my_form2">
+            <form action="{% url 'user:usercentre' %}" method="post">
+                <div class="form_info">
+                    {% csrf_token %}
+                    <p><label for="name">姓名：</label><input type="text" name="name" id="name" value=""></p>
+                    <p><label for="age">年龄：</label><input type="text" name="age" id="age" value=""></p>
+                    <p><label for="sex">性别：</label><input type="text" name="sex" id="sex" value=""></p>
+                    <p><label for="serial">员工编号：</label><input type="text" name="serial" id="serial" value=""></p>
+                    <p><label for="phone">电话号码：</label><input type="text" name="phone" id="phone" value=""></p>
+                    <p><label for="section">隶属部门：</label><input type="text" name="section" id="section" value=""></p>
+                    <input type="submit" value="提交">
+                </div>
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #ffdbaf;
+        }
+        html，body{
+            width: 100%;
+            background-color: #fffdfd;
+        }
+        .my_form{
+            width: 50%;
+            margin: 0 auto;
+        }
+        .my_control{
+            border: 1px solid yellowgreen;
+            height: 450px;
+        }
+        .reason{
+            border: 1px solid orange;
+            width: 60%;
+            margin: 60px auto;
+            text-align: center;
+        }
+        .reason p{
+            margin: 50px 0;
+        }
+        .reason p input{
+            outline: none;
+            border: 1px solid skyblue;
+        }
+        .head_nav{
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #666;
+        }
+        .head_nav a{
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            width: 33.05%;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            color: #fffdfd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head_nav">
+        {% if users.is_staff %}
+           <a href="{% url 'leaveapp:apply' %}">首页</a>
+            <a href="{% url 'user:usercentre' %}">个人信息</a>
+            <a href="{% url 'leaveapp:index' %}">请假批准</a>
+            <a href="{% url 'user:exit' %}">退出</a>
+        {% else %}
+            <a href="{% url 'leaveapp:apply' %}">首页</a>
+            <a href="{% url 'user:usercentre' %}">个人信息</a>
+            <a href="{% url 'leaveapp:result' %}">查看结果</a>
+            <a href="{% url 'user:exit' %}">退出</a>
+        {% endif %}
+    </div>
+    <div class="my_form">
+        <form action="{% url 'leaveapp:apply' %}" method="post">
+{#        <div>#}
+            {% csrf_token %}
+            <fieldset class="my_control">
+                <legend>请输入请假日期</legend>
+                <div class="reason">
+                    <p><label for="start_date">起始日期：</label><input type="text" value="" placeholder="起始年" id="start_date" name="Y"><input type="text" value="" placeholder="起始月" id="start_date" name="m"><input type="text" value="" placeholder="起始日" id="start_date" name="d"></p>
+                    <p><label for="start_date">起始日期：</label><input type="text" value="" placeholder="起始年" id="start_date" class="start_date1" name="YY"><input type="text" value="" placeholder="起始月" id="start_date" name="mm"><input type="text" value="" placeholder="起始日" id="start_date" name="dd"></p>
+                    <p><label for=leave_reason">请假原因：</label><input type="text" value="" placeholder="请假原因" id="leave_reason" name="cause"></p>
+                    <input type="submit" value="提交" id="commit">
+                </div>
+            </fieldset>
+        </form>
+{#        </div>#}
+    </div>
+{{ errasg }}
+</body>
+</html>
